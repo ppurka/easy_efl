@@ -1,0 +1,2 @@
+The patches must be applied in exactly the numbered sequence to
+easy_efl.sh.upstream, that is, 01-* should be applied before 02-*, etc.
