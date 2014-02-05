@@ -25,7 +25,7 @@ The patched version of the script has several modifications:
    has to uninstall _before_ the compilation of the updated version. So,
    if the compilation fails, then you are left with no installed package.
 
-3. You can provide user patches to the packages by making sure that the
+3. (TODO:) You can provide user patches to the packages by making sure that the
    patches work with level `-p1`. For instance if you want to patch efl then
    the following should work:
 
@@ -37,6 +37,6 @@ The patched version of the script has several modifications:
    The package_name is the same name as the svn directory name (efl.patch
    for efl, enlightenment.patch for enlightenment, etc).
 
-4. The script can backup your current installation if you provide the `-b`
+4. (TODO:) The script can backup your current installation if you provide the `-b`
    or `--backup` option.
 
