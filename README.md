@@ -17,7 +17,7 @@ The patched version of the script has several modifications:
    always clean.
 
 2. The script keeps track of all the installed files by writing log files
-   in `$HOME/.config/easy_e17`. The next time a package is updated, the
+   in `$HOME/.config/easy_efl`. The next time a package is updated, the
    script will remove the already installed files and then install the new
    files. This ensures that stale files do not remain installed.
    The unpatched version of the script can do this if you pass `--clean
