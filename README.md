@@ -2,7 +2,7 @@ easy_efl.sh
 -----------
 
 This is a script to compile and install the Enlightenment Foundation
-Libraries and Enlightenment-DR17. The script is originally written by
+Libraries and Enlightenment-DR19. The script is originally written by
 [morlenxus](http://omicron.homeip.net).
 
 This version is the patched version of the script.
