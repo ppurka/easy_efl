@@ -98,6 +98,7 @@ status_path="$tmp_path/status"
 build_path="$tmp_path/build"
 src_path="$HOME/efl_src"
 conf_files="/etc/easy_efl.conf $HOME/.config/easy_efl/easy_efl.conf $HOME/.easy_efl.conf $PWD/.easy_efl.conf"
+backup=0		# This will be set to 1 when backup up old install
 autogen_args=""		# evas:--enable-gl-x11
 linux_distri=""		# if your distribution is wrongly detected, define it here
 nice_level=0		# nice level (19 == low, -20 == high)
@@ -223,6 +224,10 @@ function logo ()
 					echo "  -s, --skip-srcupdate                  = don't update sources"
 					echo "  -a, --ask-on-src-conflicts            = ask what to do with a conflicting"
 					echo "                                          source file"
+					echo "  -b, --backup				= backup the current installation"
+					echo "					  WARNING: Use this option only if you"
+					echo "					  installed efl in its own directory, eg."
+					echo "					  /usr/efl, /opt/efl, /usr/local/efl, etc."
 					echo "      --skip=<name1>,<name2>,...        = this will skip installing the named"
 					echo "                                          libs/apps"
 					echo "  -d, --docs                            = generate programmers documentation"
@@ -844,6 +849,7 @@ do
 	fi
 	
 	case "$option" in
+		-b|--backup)				backup=1 ;;
 		-i|--install)				action="install" ;;
 		-u|--update)				action="update" ;;
 		--packagelist)			;;	# has it's own parsing section
@@ -1140,6 +1146,14 @@ if [ ! "$action"  == "srcupdate" ]; then
 		mode="root"
 	fi
 
+	if [ "$backup" -eq 1 ] && [ -d "$install_path" ]; then
+		echo -n "- backing up current installation as ${install_path}-$(date '+%Y-%m-%d-%T') ... "
+		case "$mode" in
+			user|root)	cp -Rp "$install_path" "${install_path}-$(date '+%Y-%m-%d-%T')" ;;
+			sudo)		echo "$sudopwd" | sudo -S cp -Rp "$install_path" "${install_path}-$(date '+%Y-%m-%d-%T')" ;;
+		esac
+		echo "Done."
+	fi
 
 	echo -n "- setting env variables ...... " 
 	export PATH="$install_path/bin:$PATH"
