@@ -39,6 +39,6 @@ The patched version of the script has several modifications:
    The package_name is the same name as the svn directory name (efl.patch
    for efl, enlightenment.patch for enlightenment, etc).
 
-4. (TODO:) The script can backup your current installation if you provide the `-b`
+4. The script can backup your current installation if you provide the `-b`
    or `--backup` option.
 
