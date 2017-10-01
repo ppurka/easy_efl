@@ -31,30 +31,49 @@ git_branch="origin/master"
 declare -a base_libs
 base_libs+=("efl|git|$git_baseurl/core/efl.git|$git_branch")
 base_libs+=("evas_generic_loaders|git|$git_baseurl/core/evas_generic_loaders.git|$git_branch")
-base_libs+=("elementary|git|$git_baseurl/core/elementary.git|$git_branch")
 declare -a base_apps
 base_apps+=("enlightenment|git|$git_baseurl/core/enlightenment.git|$git_branch")
+base_apps+=("extra|git|$git_baseurl/apps/extra.git|$git_branch")
 base_apps+=("entrance|git|$git_baseurl/misc/entrance.git|$git_branch")
 base_apps+=("eruler|git|$git_baseurl/apps/eruler.git|$git_branch")
 base_apps+=("terminology|git|$git_baseurl/apps/terminology.git|$git_branch")
-declare -a base_modules
-base_modules+=("alarm|git|$git_baseurl/enlightenment/modules/alarm.git|$git_branch")
-base_modules+=("cpu|git|$git_baseurl/enlightenment/modules/cpu.git|$git_branch")
-base_modules+=("diskio|git|$git_baseurl/enlightenment/modules/diskio.git|$git_branch")
-base_modules+=("forecasts|git|$git_baseurl/enlightenment/modules/forecasts.git|$git_branch")
-base_modules+=("mail|git|$git_baseurl/enlightenment/modules/mail.git|$git_branch")
-base_modules+=("moon|git|$git_baseurl/enlightenment/modules/moon.git|$git_branch")
-base_modules+=("mpdule|git|$git_baseurl/enlightenment/modules/mpdule.git|$git_branch")
-base_modules+=("net|git|$git_baseurl/enlightenment/modules/net.git|$git_branch")
-base_modules+=("news|git|$git_baseurl/enlightenment/modules/news.git|$git_branch")
-base_modules+=("penguins|git|$git_baseurl/enlightenment/modules/penguins.git|$git_branch")
-base_modules+=("places|git|$git_baseurl/enlightenment/modules/places.git|$git_branch")
-base_modules+=("tclock|git|$git_baseurl/enlightenment/modules/tclock.git|$git_branch")
+declare -a extra_modules
+extra_modules+=("alarm|git|$git_baseurl/enlightenment/modules/alarm.git|$git_branch")
+extra_modules+=("cpu|git|$git_baseurl/enlightenment/modules/cpu.git|$git_branch")
+extra_modules+=("diskio|git|$git_baseurl/enlightenment/modules/diskio.git|$git_branch")
+extra_modules+=("edgar|git|$git_baseurl/enlightenment/modules/edgar.git|$git_branch")
+extra_modules+=("extramenu|git|$git_baseurl/enlightenment/modules/extramenu.git|$git_branch")
+extra_modules+=("forecasts|git|$git_baseurl/enlightenment/modules/forecasts.git|$git_branch")
+extra_modules+=("mail|git|$git_baseurl/enlightenment/modules/mail.git|$git_branch")
+extra_modules+=("moon|git|$git_baseurl/enlightenment/modules/moon.git|$git_branch")
+extra_modules+=("mpdule|git|$git_baseurl/enlightenment/modules/mpdule.git|$git_branch")
+extra_modules+=("net|git|$git_baseurl/enlightenment/modules/net.git|$git_branch")
+extra_modules+=("news|git|$git_baseurl/enlightenment/modules/news.git|$git_branch")
+extra_modules+=("penguins|git|$git_baseurl/enlightenment/modules/penguins.git|$git_branch")
+extra_modules+=("places|git|$git_baseurl/enlightenment/modules/places.git|$git_branch")
+extra_modules+=("tclock|git|$git_baseurl/enlightenment/modules/tclock.git|$git_branch")
+declare -a extra_libs
+extra_libs+=("python-efl|git|$git_baseurl/bindings/python/python-efl.git|$git_branch")
 declare -a extra_apps
+extra_apps+=("econnman|git|$git_baseurl/apps/econnman.git|$git_branch")
+extra_apps+=("edi|git|$git_baseurl/tools/edi.git|$git_branch")
+extra_apps+=("elm-theme-viewer|git|$git_baseurl/tools/elm-theme-viewer.git|$git_branch")
+extra_apps+=("enjoy|git|$git_baseurl/apps/enjoy.git|$git_branch")
 extra_apps+=("enventor|git|$git_baseurl/tools/enventor.git|$git_branch")
+extra_apps+=("ephoto|git|$git_baseurl/apps/ephoto.git|$git_branch")
+extra_apps+=("expedite|git|$git_baseurl/tools/expedite.git|$git_branch")
+extra_apps+=("rage|git|$git_baseurl/apps/rage.git|$git_branch")
 declare -a extra_games
 extra_games+=("etrophy|git|$git_baseurl/games/etrophy.git|$git_branch")
 extra_games+=("elemines|git|$git_baseurl/games/elemines.git|$git_branch")
+declare -a extra_e16
+extra_e16+=("imlib2|git|$git_baseurl/legacy/imlib2.git|$git_branch")
+extra_e16+=("imlib2_loaders|git|$git_baseurl/legacy/imlib2_loaders.git|$git_branch")
+extra_e16+=("e16|git|$git_baseurl/e16/e16.git|$git_branch")
+extra_e16+=("e16-epplets|git|$git_baseurl/e16/e16-epplets.git|$git_branch")
+extra_e16+=("e16-keyedit|git|$git_baseurl/e16/e16-keyedit.git|$git_branch")
+extra_e16+=("e16-menuedit|git|$git_baseurl/e16/e16-menuedit.git|$git_branch")
+extra_e16+=("e16-themes|git|$git_baseurl/e16/e16-themes.git|$git_branch")
 declare -a custom_packages
 # see --custompackage
 
@@ -68,22 +87,30 @@ for package in ${base_apps[*]}
 {	package_name=`echo "$package" | cut -d'|' -f1`
 	base_apps_list="$base_apps_list $package_name"
 }
-for package in ${base_modules[*]}
+for package in ${extra_modules[*]}
 {	package_name=`echo "$package" | cut -d'|' -f1`
-	base_modules_list="$base_modules_list $package_name"
+	extra_modules_list="$extra_modules_list $package_name"
+}
+for package in ${extra_libs[*]}
+{	package_name=`echo "$package" | cut -d'|' -f1`
+	extra_libs_list="$extra_libs_list $package_name"
 }
 for package in ${extra_apps[*]}
 {	package_name=`echo "$package" | cut -d'|' -f1`
-	extra_games_list="$extra_apps_list $package_name"
+	extra_apps_list="$extra_apps_list $package_name"
 }
 for package in ${extra_games[*]}
 {	package_name=`echo "$package" | cut -d'|' -f1`
 	extra_games_list="$extra_games_list $package_name"
 }
+for package in ${extra_e16[*]}
+{	package_name=`echo "$package" | cut -d'|' -f1`
+	extra_e16_list="$extra_e16_list $package_name"
+}
 
 # Basic Dependencies
-deps_bin="automake byacc|yacc g++ gcc git libtool pkg-config svn"
-deps_dev="dbus-1 fontconfig freetype GL jpeg lua|lua5.1 png rsvg-2 udev xml2 X11 Xext Xrandr xcb"
+deps_bin="automake autopoint byacc|yacc dbus-launch g++ gcc git libtool pkg-config pulseaudio"
+deps_dev="blkid BulletSoftBody check dbus-1 fontconfig freetype fribidi gif GL gstreamer-1.0 gstvideo-1.0 jpeg lua|lua5.1|lua5.2|lua5.3 luajit-5.1 mount png pam poppler poppler-cpp pulse raw rsvg-2 sndfile spectre ssl|gnutls systemd tiff udev xml2 X11 xcb xcb-keysyms xcb-shape Xcursor Xcomposite Xext Xinerama Xrandr Xss Xtst"
 
 
 
@@ -110,7 +137,7 @@ command_options=$@
 clean=0
 
 animation="star"
-online_source="http://omicron.homeip.net/projects/easy_efl/dev/easy_efl.sh"
+online_source="http://omicron.homeip.net/svn/easy_efl/easy_efl.sh"
 
 
 #############################################################################
@@ -121,7 +148,7 @@ function package_find ()
 	name=$1
 
 	found=0
-	for package in ${base_libs[*]} ${base_apps[*]} ${base_modules[*]} ${extra_apps[*]} ${extra_games[*]} ${custom_packages[*]}
+	for package in ${base_libs[*]} ${base_apps[*]} ${extra_modules[*]} ${extra_libs[*]} ${extra_apps[*]} ${extra_games[*]} ${extra_e16[*]} ${custom_packages[*]}
 	{
 		package_name=`echo "$package" | cut -d'|' -f1`
 		if [ "$package_name" = "$name" ]; then
@@ -186,9 +213,10 @@ function logo ()
 					echo "  -u, --update                          = update your installed software"
 					echo
 					echo "      --packagelist=<list>              = software package list:"
-					echo "                           - basic      (efl+enlightenment+custom)"
-					echo "                           - full       (efl+enlightenment+e-modules+apps+custom)"
-					echo "                           - custom     (custompackages)"
+					echo "                           - basic        (efl+enlightenment+custom)"
+					echo "                           - full         (efl+enlightenment+e-modules+apps+custom)"
+					echo "                           - complete     (efl+enlightenment+e-modules+apps+e16+custom)"
+					echo "                           - custom       (custompackages)"
 					echo
 					echo "      --help                            = full help, many more options"
 				else
@@ -205,6 +233,7 @@ function logo ()
 					echo "      --packagelist=<list>              = software package list:"
 					echo "                           - basic        (efl+enlightenment+custom)"
 					echo "                           - full         (efl+enlightenment+e-modules+apps+custom)"
+					echo "                           - complete     (efl+enlightenment+e-modules+apps+e16+custom)"
 					echo "                           - custom       (custompackages)"
 					echo "      --custompackage=<n>:<g/s>,<u>,<b> = add custom package:"
 					echo "                                          <name>:<git/svn>,<url>,<branch>"
@@ -229,6 +258,7 @@ function logo ()
 					echo "                                          after installation"
 					echo "  -e, --skip-errors                     = continue compiling even if there is"
 					echo "                                          an error"
+					echo "      --skip-depcheck                   = continue on dependency errors"
 					echo "  -w, --wait                            = don't exit the script after finishing,"
 					echo "                                          this allows 'xterm -e ./easy_efl.sh -i'"
 					echo "                                          without closing the xterm"
@@ -268,8 +298,8 @@ function logo ()
 				echo "- source checkout/update"
 				;;
 			2)
-				echo "- lib-compilation and installation"
-				echo "- apps-compilation and installation"
+				echo "- libs compilation and installation"
+				echo "- apps compilation and installation"
 				;;
 			3)
 				echo "- cleaning"
@@ -410,6 +440,12 @@ function compile ()
 	path="$src_path/$name"
 
 	write_name "$name"
+
+	if [ "$action"  == "srcupdate" ]; then
+		echo "SKIPPED"
+		touch $status_path/$name.skipped
+		return
+	fi
 	
 	for one in $skip; do
 		if [ "$name" == "$one" ]; then
@@ -823,6 +859,7 @@ for file in $conf_files; do
 	if [ -e "$file" ]; then
 		# load configfile 
 		for option in `cat "$file"`; do
+			if [[ "$option" =~ ^# ]]; then continue; fi
 			easy_options="$easy_options $option"
 		done
 	fi
@@ -902,6 +939,7 @@ do
 			skip="`echo "$value" | tr -s '\,' '\ '` $skip"
 			;;
 		-e|--skip-errors)			skip_errors=1 ;;		
+		--skip-depcheck)			skip_depcheck=1 ;;
 		-w|--wait)					wait=1 ;;
 		--anim)
 			case $value in
@@ -1015,8 +1053,9 @@ for package in ${custom_packages[*]}
 }
 
 # create packagelists
-packages_basic="$base_libs_list$base_apps_list$base_modules_list$custom_packages_list"
-packages_full="$base_libs_list$base_apps_list$base_modules_list$extra_apps_list$extra_games_list$custom_packages_list"
+packages_basic="$base_libs_list$base_apps_list$custom_packages_list"
+packages_full="$base_libs_list$base_apps_list$extra_modules_list$extra_libs_list$extra_apps_list$extra_games_list$custom_packages_list"
+packages_complete="$base_libs_list$base_apps_list$extra_modules_list$extra_libs_list$extra_apps_list$extra_games_list$extra_e16_list$custom_packages_list"
 packages_custom="$custom_packages_list"
 
 # parse --packagelist: select packagelist
@@ -1029,8 +1068,9 @@ do
 
 	if [ "$option" == "--packagelist" ]; then
 		case $value in
-			"custom")			packages="$packages_custom" ;;
-			"full")				packages="$packages_full" ;;
+			"custom")			packages="$packages_custom"		;;
+			"full")				packages="$packages_full"		;;
+			"complete")			packages="$packages_complete"	;;
 		esac
 	fi 
 done
@@ -1072,7 +1112,9 @@ for deps in $deps_bin $make; do
 	done
 
 	if [ $found -eq 0 ]; then
-		error "Required command missing!"
+		if [ ! "$skip_depcheck" ]; then
+			error "Required command missing!"
+		fi
 	fi
 done
 
@@ -1100,7 +1142,9 @@ for deps in $deps_dev; do
 	done
 
 	if [ $found -eq 0 ]; then
-		error "Required include missing!"
+		if [ ! "$skip_depcheck" ]; then
+			error "Required include missing!"
+		fi
 	fi
 done
 rm -rf $compfile 2>/dev/null
@@ -1226,7 +1270,7 @@ if [ ! "$action"  == "srcupdate" ]; then
 
 	if [ "$only" ]; then
 		echo
-		echo "- matching packages with package lists (basic/full/custom)..."
+		echo "- matching packages with package lists (basic/full/complete/custom)..."
 
 		monly=$only
 		only=""
@@ -1234,7 +1278,7 @@ if [ ! "$action"  == "srcupdate" ]; then
 			found=0;
 			echo -n "  - $opkg: "
 
-			for pkg in $packages; do
+			for pkg in $packages_complete; do
 				if [ "$opkg" == "$pkg" ]; then
 					found=1;
 				fi
@@ -1338,6 +1382,7 @@ if [ -z "$skip_srcupdate" ]; then
 							git checkout $package_branch
 							update_done=1
 						fi
+						git submodule update --init --recursive
 					else
 						# Clean directory, new Clone/Checkout
 						echo "CLONE/CHECKOUT:"
@@ -1351,6 +1396,7 @@ if [ -z "$skip_srcupdate" ]; then
 						if [ $error -eq 0 ]; then
 							update_done=1
 						fi
+						git submodule update --init --recursive
 					fi
 					;;
 
