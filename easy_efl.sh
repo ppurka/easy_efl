@@ -505,6 +505,9 @@ function compile ()
 		fi
 	done
 	
+	if [ -e "$HOME/.config/easy_efl/$name.patch" ] ; then
+		run_command "$name" "$path" "patch"   "patch:	" "$mode"    "patch -p1 -i $HOME/.config/easy_efl/$name.patch"
+	fi
 	if [ -e "autogen.sh" ]; then
 		run_command "$name" "$path" "autogen" "autogen: " "$mode"    "./autogen.sh --prefix=$install_path $accache $args"
 		if [ ! -e "$status_path/$name.noerrors" ] ; then return ; fi
